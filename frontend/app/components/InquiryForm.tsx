@@ -75,7 +75,7 @@ export default function InquiryForm(): JSX.Element {
       animate={{ opacity: 1, y: 0 }}
       className="max-w-3xl mx-auto p-6 sm:p-10 bg-gradient-to-tr from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700"
     >
-      <div className="flex items-center gap-4 mb-6">
+      <div className="flex items-center gap-4 mt-16 mb-6">
         <div className="p-3 bg-gradient-to-br from-indigo-500 to-pink-500 rounded-xl text-white shadow-md">
           <Mail size={20} />
         </div>
