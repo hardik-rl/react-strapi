@@ -4,7 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ApolloProvider } from "@apollo/client/react";
 import client from "@/shared/utils/apollo-client";
-import Header from "./components/Header";
+import Header from "../components/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,7 +34,7 @@ export default function RootLayout({
         <ApolloProvider client={client}>
           {/* <Component {...pageProps} /> */}
           <Header />
-          {children}
+        <div className="h-[calc(100vh-5rem)] pt-20">{children}</div>  
         </ApolloProvider>
 
       </body>

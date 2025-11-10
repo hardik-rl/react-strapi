@@ -1,9 +1,9 @@
 import React from 'react'
-import InquiryForm from '../../components/InquiryForm'
+import Blog from '../../components/Blog'
 
 const page = () => {
   return (
-     <InquiryForm />
+    <Blog />
   )
 }
 
