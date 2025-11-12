@@ -11,8 +11,18 @@ const GET_ARTICLES = gql`
     }
 }`;
 
+interface Article {
+  title: string;
+  slug: string;
+  description: string;
+}
+
+interface GetArticlesResponse {
+  articles: Article[];
+}
+
 export default function BlogList() {
-  const { loading, error, data } = useQuery(GET_ARTICLES);
+  const { loading, error, data } = useQuery<GetArticlesResponse>(GET_ARTICLES);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -20,13 +30,15 @@ export default function BlogList() {
   if (!data?.articles?.length) {
     return <p>No articles found.</p>;
   }
-
+  
   return (
-    <ul className="p-4 space-y-3">
+    <ul className="p-4 grid grid-cols-3 gap-3">
       {data?.articles?.map((item: any) => (
-        <li key={item.slug} className="border p-3 rounded-md hover:bg-gray-50">
-          <h2 className="text-lg font-semibold">{item.title}</h2>
-          <p className="text-sm text-gray-600">{item.description}</p>
+        <li key={item.slug} className="border p-3 shadow-md rounded-md hover:bg-gray-700 hover:text-white transition">
+         <a href={`/blog/${item.slug}`}>
+          <h2 className="text-xl font-bold mb-2">{item.title}</h2>
+          <p>{item.description}</p>
+         </a>
         </li>
       ))}
     </ul>
