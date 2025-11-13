@@ -1,20 +1,9 @@
 "use client";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "../assets/css/globals.css";
 import { ApolloProvider } from "@apollo/client/react";
 import client from "@/shared/utils/apollo-client";
 import Header from "../components/Header";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 // export const metadata: Metadata = {
 //   title: "Create Next App",
@@ -28,15 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body>
         <ApolloProvider client={client}>
-          {/* <Component {...pageProps} /> */}
           <Header />
-        <div className="h-[calc(100vh-5rem)] pt-20">{children}</div>  
+          <div className="h-[calc(100vh-5rem)] pt-20">{children}</div>
         </ApolloProvider>
-
       </body>
     </html>
   );
