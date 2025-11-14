@@ -1,4 +1,3 @@
-"use client"
 import BlogDetail from '@/components/BlogDetail'
 
 const DetailBlog = () => {

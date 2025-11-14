@@ -1,7 +1,9 @@
 "use client";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client/react";
-import { useParams } from "next/navigation";
+import { ArrowLeft } from "lucide-react";
+import Image from "next/image";
+import { useParams, useRouter } from "next/navigation";
 
 const GET_ARTICLES = gql`
   query {
@@ -9,6 +11,10 @@ const GET_ARTICLES = gql`
       slug
       title
       description
+      cover {
+        url
+        alternativeText
+      }
       author {
         name
         email
@@ -25,7 +31,7 @@ interface Article {
   slug: string;
   title: string;
   description: string;
-  // cover: string;
+  cover: string;
   author: {
     name: string;
     email: string;
@@ -38,6 +44,7 @@ interface Article {
 
 export default function BlogDetails() {
   const { slug } = useParams();
+  const router = useRouter();
 
   const { loading, error, data } = useQuery<{ articles: Article[] }>(GET_ARTICLES);
   console.log(data, "data");
@@ -51,6 +58,22 @@ export default function BlogDetails() {
 
   return (
     <div className="p-6">
+      <button
+        onClick={() => router.push("/blog")}
+        className="flex mb-4 items-center gap-1 cursor-pointer text-sm font-medium text-gray-700 hover:text-blue-600"
+      >
+        <ArrowLeft size={18} />
+        <span>Back</span>
+      </button>
+      <Image
+        className="w-full max-h-[520px] object-cover object-top mb-4 rounded"
+        width={320}
+        height={520}
+        loading="lazy"
+        unoptimized
+        src={`${process.env.NEXT_PUBLIC_ANALYTICS_ID}${article?.cover?.url}` || ""}
+        alt={article?.cover?.alternativeText}
+      />
       <h1 className="text-2xl text-black-700 mb-2">
         <strong>Title:</strong> {article.title}
       </h1>
