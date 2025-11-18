@@ -75,9 +75,8 @@ export default function BlogDetails() {
         alt={article?.cover?.alternativeText}
       />
       <h1 className="text-2xl text-black-700 mb-2">
-        <strong>Title:</strong> {article.title}
+        <strong> {article.title}</strong>
       </h1>
-      <p className="text-black-600 mb-4">Slug: {article.slug}</p>
       <p className="text-black-700">
         <strong>Description:</strong> {article.description}
       </p>
@@ -85,7 +84,7 @@ export default function BlogDetails() {
         <strong>Author:</strong> {article.author.name} ({article.author.email})
       </p>
       <p className="text-black-700">
-        <strong>Category:</strong> {article.category.name} (Slug: {article.category.slug})
+        <strong>Category:</strong> {article.category.name}
       </p>
     </div>
   );

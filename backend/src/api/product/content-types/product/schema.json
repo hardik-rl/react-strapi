@@ -16,6 +16,25 @@
     },
     "price": {
       "type": "integer"
+    },
+    "Stock": {
+      "type": "string"
+    },
+    "Rating": {
+      "type": "decimal"
+    },
+    "Description": {
+      "type": "blocks"
+    },
+    "Image": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }

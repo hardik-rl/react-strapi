@@ -37,7 +37,7 @@ export default function BlogList() {
         <li key={item.slug} className="border p-3 shadow-md rounded-md hover:bg-gray-700 hover:text-white transition">
          <a href={`/blog/${item.slug}`}>
           <h2 className="text-xl font-bold mb-2">{item.title}</h2>
-          <p>{item.description}</p>
+          <p>{item.description.slice(0, 100)}...</p>
          </a>
         </li>
       ))}
