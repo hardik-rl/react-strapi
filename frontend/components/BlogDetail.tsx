@@ -31,7 +31,10 @@ interface Article {
   slug: string;
   title: string;
   description: string;
-  cover: string;
+  cover: {
+    url: string;
+    alternativeText: string;
+  };
   author: {
     name: string;
     email: string;
