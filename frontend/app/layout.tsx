@@ -20,7 +20,7 @@ export default function RootLayout({
       <body>
         <ApolloProvider client={client}>
           <Header />
-          <div className="h-[calc(100vh-5rem)] pt-20">{children}</div>
+          <div className="h-[calc(100vh-5rem)] pt-20 px-5">{children}</div>
         </ApolloProvider>
       </body>
     </html>

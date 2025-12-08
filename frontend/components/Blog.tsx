@@ -1,4 +1,5 @@
 "use client";
+import SpinLoader from "@/shared/utils/SpinLoader";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client/react";
 
@@ -24,7 +25,7 @@ interface GetArticlesResponse {
 export default function BlogList() {
   const { loading, error, data } = useQuery<GetArticlesResponse>(GET_ARTICLES);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <SpinLoader />;
   if (error) return <p>Error: {error.message}</p>;
 
   if (!data?.articles?.length) {

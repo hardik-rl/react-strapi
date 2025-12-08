@@ -1,4 +1,5 @@
 "use client";
+import SpinLoader from "@/shared/utils/SpinLoader";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client/react";
 import { ArrowLeft } from "lucide-react";
@@ -52,7 +53,7 @@ export default function BlogDetails() {
   const { loading, error, data } = useQuery<{ articles: Article[] }>(GET_ARTICLES);
   console.log(data, "data");
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <SpinLoader />;
   if (error) return <p>Error: {error.message}</p>;
 
   const article = data?.articles?.find((a: Article) => a.slug === slug);

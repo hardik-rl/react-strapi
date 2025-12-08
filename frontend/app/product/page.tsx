@@ -1,10 +1,10 @@
-import ProductPage from '@/components/ProductList'
-import React from 'react'
+  import React from 'react'
+  import ProductPage from '@/components/ProductList'
 
-const page = () => {
-  return (
-     <ProductPage />
-  )
-}
+  const page = () => {
+    return (
+      <ProductPage />
+    )
+  }
 
-export default page
+  export default page

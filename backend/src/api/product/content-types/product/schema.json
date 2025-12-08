@@ -17,16 +17,16 @@
     "price": {
       "type": "integer"
     },
-    "Stock": {
+    "stock": {
       "type": "string"
     },
-    "Rating": {
+    "rating": {
       "type": "decimal"
     },
-    "Description": {
+    "description": {
       "type": "blocks"
     },
-    "Image": {
+    "image": {
       "type": "media",
       "multiple": true,
       "allowedTypes": [
