@@ -23,7 +23,7 @@ export const productSchema = object({
   description: string().required(),
 });
 
-const AddProduct = ({form, setForm, modalOpen, setModalOpen, prodEdit, setProdEdit}: {form: any, setForm: any, modalOpen: boolean, setModalOpen: any, prodEdit: boolean, setProdEdit: any}) => {
+const AddUpdateProduct = ({form, setForm, modalOpen, setModalOpen, prodEdit, setProdEdit}: {form: any, setForm: any, modalOpen: boolean, setModalOpen: any, prodEdit: boolean, setProdEdit: any}) => {
 
   const [msg, setMsg] = useState("");
 
@@ -152,4 +152,4 @@ const AddProduct = ({form, setForm, modalOpen, setModalOpen, prodEdit, setProdEd
   );
 };
 
-export default AddProduct;
+export default AddUpdateProduct;

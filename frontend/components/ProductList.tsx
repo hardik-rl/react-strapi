@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react'
-import ProductPage from './AddProduct'
+import AddUpdateProduct from './AddUpdateProduct'
 import { gql } from '@apollo/client';
 import { useMutation, useQuery } from '@apollo/client/react';
 import { ArrowLeft, ArrowRight, Pencil, Trash } from 'lucide-react';
@@ -144,7 +144,7 @@ const ProductList = () => {
 
     return (
         <>
-            <ProductPage modalOpen={modalOpen} setModalOpen={setModalOpen} form={form} setForm={setForm} prodEdit={prodEdit} setProdEdit={setProdEdit}/>
+            <AddUpdateProduct modalOpen={modalOpen} setModalOpen={setModalOpen} form={form} setForm={setForm} prodEdit={prodEdit} setProdEdit={setProdEdit}/>
             <table className="table-auto">
                 <thead>
                     <tr>
