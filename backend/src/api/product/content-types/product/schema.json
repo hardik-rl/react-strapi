@@ -35,6 +35,10 @@
         "videos",
         "audios"
       ]
+    },
+    "prod_id": {
+      "type": "uid",
+      "targetField": "name"
     }
   }
 }

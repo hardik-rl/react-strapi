@@ -23,10 +23,8 @@ export const productSchema = object({
   description: string().required(),
 });
 
-const AddProduct = () => {
-  const [modalOpen, setModalOpen] = useState(false);
+const AddProduct = ({form, setForm, modalOpen, setModalOpen, prodEdit, setProdEdit}: {form: any, setForm: any, modalOpen: boolean, setModalOpen: any, prodEdit: boolean, setProdEdit: any}) => {
 
-  const [form, setForm] = useState({ name: "", price: "", description: "" });
   const [msg, setMsg] = useState("");
 
   const {
@@ -61,6 +59,7 @@ const AddProduct = () => {
       setModalOpen(false);
     }
     setMsg("");
+    setProdEdit(false);
     await createUser({
       variables: {
         name: form.name,
@@ -83,6 +82,7 @@ const AddProduct = () => {
 
   const handleClose = () => {
     setModalOpen(false);
+    setProdEdit(false);
     reset();
   }
 
@@ -92,11 +92,11 @@ const AddProduct = () => {
         <div className="flex items-center justify-between">
           <h1 className='text-2xl font-bold'>Product List</h1>
           <button
-            className="btn bg-indigo-600 text-white px-4 py-2 rounded"
+            className="btn bg-indigo-600 text-white px-4 py-2 rounded cursor-pointer hover:bg-indigo-900"
             ref={trigger}
             onClick={() => setModalOpen(true)}
           >
-            Add Product
+           {prodEdit ? "Update" : "Add Product" }
           </button>
 
         </div>
@@ -108,7 +108,7 @@ const AddProduct = () => {
             className="w-full max-w-[570px] rounded-xl bg-white p-6"
           >
             <div className="flex items-center mb-4 justify-between">
-              <h1 className="font-bold text-2xl">Add Product</h1>
+              <h1 className="font-bold text-2xl cursor-pointer">{prodEdit ? "Update Product" : "Add Product" }</h1>
               <button onClick={() => handleClose()} className="p-3 cursor-pointer"><X /></button>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="p-2">

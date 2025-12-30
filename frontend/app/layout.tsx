@@ -4,6 +4,7 @@ import "../assets/css/globals.css";
 import { ApolloProvider } from "@apollo/client/react";
 import client from "@/shared/utils/apollo-client";
 import Header from "../components/Header";
+import { ToastContainer } from "react-toastify";
 
 // export const metadata: Metadata = {
 //   title: "Create Next App",
@@ -21,6 +22,7 @@ export default function RootLayout({
         <ApolloProvider client={client}>
           <Header />
           <div className="h-[calc(100vh-5rem)] pt-20 px-5">{children}</div>
+          <ToastContainer />
         </ApolloProvider>
       </body>
     </html>

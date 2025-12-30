@@ -31,17 +31,20 @@ export default function BlogList() {
   if (!data?.articles?.length) {
     return <p>No articles found.</p>;
   }
-  
+
   return (
-    <ul className="p-4 grid grid-cols-3 gap-3">
-      {data?.articles?.map((item: any) => (
-        <li key={item.slug} className="border p-3 shadow-md rounded-md hover:bg-gray-700 hover:text-white transition">
-         <a href={`/blog/${item.slug}`}>
-          <h2 className="text-xl font-bold mb-2">{item.title}</h2>
-          <p>{item.description.slice(0, 100)}...</p>
-         </a>
-        </li>
-      ))}
-    </ul>
+    <>
+      <h1 className="text-3xl font-bold mb-2 text-center">Blog Articles</h1>
+      <ul className="p-4 grid grid-cols-3 gap-3">
+        {data?.articles?.map((item: any) => (
+          <li key={item.slug} className="border p-3 shadow-md rounded-md hover:bg-gray-700 hover:text-white transition">
+            <a href={`/blog/${item.slug}`}>
+              <h2 className="text-xl font-bold mb-2">{item.title}</h2>
+              <p>{item.description.slice(0, 100)}...</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }
