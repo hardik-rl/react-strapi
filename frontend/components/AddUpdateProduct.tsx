@@ -6,6 +6,7 @@ import { number, object, string } from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { X } from "lucide-react";
+import { toast } from "react-toastify";
 
 const CREATE_PRODUCT = gql`
   mutation CreateProduct($name: String!, $price: Int!, $description: JSON) {
@@ -17,13 +18,31 @@ const CREATE_PRODUCT = gql`
   }
 `;
 
+const UPDATE_PRODUCT = gql`
+ mutation UpdateProduct(
+  $documentId: ID!,
+  $name: String!,
+  $price: Int!,
+  $description: JSON
+) {
+  updateProduct(
+    documentId: $documentId
+    data: { name: $name, price: $price, description: $description }
+  ) {
+    documentId
+    name
+  }
+}
+`;
+
+
 export const productSchema = object({
   name: string().required(),
   price: number().typeError("Price must be number").required("Price is required"),
   description: string().required(),
 });
 
-const AddUpdateProduct = ({form, setForm, modalOpen, setModalOpen, prodEdit, setProdEdit}: {form: any, setForm: any, modalOpen: boolean, setModalOpen: any, prodEdit: boolean, setProdEdit: any}) => {
+const AddUpdateProduct = ({ form, setForm, modalOpen, setModalOpen, prodEdit, setProdEdit }: { form: any, setForm: any, modalOpen: boolean, setModalOpen: any, prodEdit: boolean, setProdEdit: any }) => {
 
   const [msg, setMsg] = useState("");
 
@@ -54,31 +73,60 @@ const AddUpdateProduct = ({form, setForm, modalOpen, setModalOpen, prodEdit, set
   const trigger = useRef(null);
   const modal = useRef(null);
 
+  const [createProduct] = useMutation(CREATE_PRODUCT);
+  const [updateProduct] = useMutation(UPDATE_PRODUCT);
+
+
   const onSubmit = async (data: any) => {
-    if (errors) {
-      setModalOpen(false);
-    }
+    // if (errors) return;
+
     setMsg("");
+    setModalOpen(false);
     setProdEdit(false);
-    await createUser({
-      variables: {
-        name: form.name,
-        price: parseFloat(form.price),
-        description: [
-          {
-            type: "paragraph",
-            children: [
-              {
-                type: "text",
-                text: form.description,
-              },
-            ],
+    const variables = {
+      name: form.name,
+      price: parseInt(form.price),
+      description: [
+        {
+          type: "paragraph",
+          children: [
+            {
+              type: "text",
+              text: form.description,
+            },
+          ],
+        },
+      ],
+    };
+
+    try {
+      if (prodEdit) {
+        // ✅ UPDATE
+        await updateProduct({
+          variables: {
+            documentId: prodEdit,
+            ...variables,
           },
-        ],
-        // description: form.description,
-      },
-    });
+        });
+        toast.success("Product Updated Successfully");
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
+      } else {
+        // ✅ CREATE
+        await createProduct({
+          variables,
+        });
+        toast.success("Product Added Successfully");
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
+
 
   const handleClose = () => {
     setModalOpen(false);
@@ -96,7 +144,7 @@ const AddUpdateProduct = ({form, setForm, modalOpen, setModalOpen, prodEdit, set
             ref={trigger}
             onClick={() => setModalOpen(true)}
           >
-           {prodEdit ? "Update" : "Add Product" }
+            {prodEdit ? "Update" : "Add Product"}
           </button>
 
         </div>
@@ -108,7 +156,7 @@ const AddUpdateProduct = ({form, setForm, modalOpen, setModalOpen, prodEdit, set
             className="w-full max-w-[570px] rounded-xl bg-white p-6"
           >
             <div className="flex items-center mb-4 justify-between">
-              <h1 className="font-bold text-2xl cursor-pointer">{prodEdit ? "Update Product" : "Add Product" }</h1>
+              <h1 className="font-bold text-2xl cursor-pointer">{prodEdit ? "Update Product" : "Add Product"}</h1>
               <button onClick={() => handleClose()} className="p-3 cursor-pointer"><X /></button>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="p-2">

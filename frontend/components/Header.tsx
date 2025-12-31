@@ -8,8 +8,8 @@ export default function Header() {
 
   const navLinks = [
     { name: "Home", href: "/" },
-    { name: "Blogs", href: "/Blogs" },
-    { name: "Products", href: "/products" },
+    { name: "Blog", href: "/blog" },
+    { name: "Product", href: "/product" },
   ];
 
   return (
