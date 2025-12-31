@@ -76,12 +76,7 @@ const ProductList = () => {
     const handleUpdate = async (item: any) => {
         setForm({ name: item?.name, price: item?.price, description: item?.description[0]?.children[0]?.text });
         setProdEdit(item?.documentId);
-        try {
-            setModalOpen(true);
-            toast.success("Product updated successfully");
-        } catch (error) {
-            toast.error(error instanceof Error ? error.message : "Update failed");
-        }
+        setModalOpen(true);
     };
 
     const paginatedProducts = data?.products.slice(

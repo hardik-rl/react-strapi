@@ -1,7 +1,7 @@
 "use client"
 import { gql } from "@apollo/client";
 import { useMutation } from "@apollo/client/react";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { number, object, string } from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -50,25 +50,29 @@ const AddUpdateProduct = ({ form, setForm, modalOpen, setModalOpen, prodEdit, se
     register,
     reset,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(productSchema),
   });
 
-  const [createUser, { loading }] = useMutation(CREATE_PRODUCT, {
-    onCompleted: (data: any) => {
-      setMsg("✅ Product Created Successfully!");
-      setForm({ name: "", price: "", description: "" });
-    },
-    onError: (error: any) => {
-      setMsg(`❌ ${error.message}`);
-    },
-  });
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
+    setError(name as keyof typeof errors, { message: "" });
   };
+
+  useEffect(() => {
+    if (modalOpen && form?.name) {
+      reset({
+        name: form.name,
+        price: form.price,
+        description: form.description,
+      });
+    }
+  }, [modalOpen, form, reset]);
+
+
 
   const trigger = useRef(null);
   const modal = useRef(null);
@@ -79,7 +83,6 @@ const AddUpdateProduct = ({ form, setForm, modalOpen, setModalOpen, prodEdit, se
 
   const onSubmit = async (data: any) => {
     // if (errors) return;
-
     setMsg("");
     setModalOpen(false);
     setProdEdit(false);
@@ -167,7 +170,7 @@ const AddUpdateProduct = ({ form, setForm, modalOpen, setModalOpen, prodEdit, se
                 onChange={handleChange}
                 className="border p-2 w-full rounded-lg"
               />
-              <p className="text-red-500 mb-6">{errors.name?.message}</p>
+              <p className="text-red-500 mb-6 text-sm">{errors.name?.message}</p>
 
               <input
                 placeholder="Description"
@@ -176,7 +179,7 @@ const AddUpdateProduct = ({ form, setForm, modalOpen, setModalOpen, prodEdit, se
                 onChange={handleChange}
                 className="border p-2 w-full rounded-lg h-24"
               />
-              <p className="text-red-500 mb-6">{errors.description?.message}</p>
+              <p className="text-red-500 mb-6 text-sm">{errors.description?.message}</p>
 
               <input
                 placeholder="Price"
@@ -186,10 +189,11 @@ const AddUpdateProduct = ({ form, setForm, modalOpen, setModalOpen, prodEdit, se
                 className="border p-2 w-full rounded-lg"
                 type="number"
               />
-              <p className="text-red-500 mb-6">{errors.price?.message}</p>
+              <p className="text-red-500 mb-6 text-sm">{errors.price?.message}</p>
 
-              <button disabled={loading} className="bg-indigo-600 hover:bg-indigo-900 text-white px-4 py-2 rounded cursor-pointer">
-                {loading ? "Creating..." : "Submit"}
+              <button className="bg-indigo-600 hover:bg-indigo-900 text-white px-4 py-2 rounded cursor-pointer">
+                {/* {loading ? "Creating..." : "Submit"} */}
+                Submit
               </button>
               {msg && <p className="text-sm mt-2">{msg}</p>}
             </form>
