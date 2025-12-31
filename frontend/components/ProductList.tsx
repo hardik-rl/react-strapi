@@ -5,7 +5,6 @@ import { gql } from '@apollo/client';
 import { useMutation, useQuery } from '@apollo/client/react';
 import { ArrowLeft, ArrowRight, Pencil, Trash } from 'lucide-react';
 import SpinLoader from '@/shared/utils/SpinLoader';
-import Image from 'next/image';
 import { toast } from 'react-toastify';
 
 const GET_PRODUCTS = gql`
@@ -15,12 +14,6 @@ const GET_PRODUCTS = gql`
       name
       price
       description
-      rating
-      stock
-      image {
-        url
-        alternativeText
-      }
     }
 }`;
 

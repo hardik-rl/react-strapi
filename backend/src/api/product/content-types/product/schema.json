@@ -17,24 +17,8 @@
     "price": {
       "type": "integer"
     },
-    "stock": {
-      "type": "string"
-    },
-    "rating": {
-      "type": "decimal"
-    },
     "description": {
       "type": "blocks"
-    },
-    "image": {
-      "type": "media",
-      "multiple": true,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
     },
     "prod_id": {
       "type": "uid",

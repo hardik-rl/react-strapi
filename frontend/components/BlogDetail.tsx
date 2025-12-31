@@ -51,7 +51,6 @@ export default function BlogDetails() {
   const router = useRouter();
 
   const { loading, error, data } = useQuery<{ articles: Article[] }>(GET_ARTICLES);
-  console.log(data, "data");
 
   if (loading) return <SpinLoader />;
   if (error) return <p>Error: {error.message}</p>;
