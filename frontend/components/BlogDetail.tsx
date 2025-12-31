@@ -60,35 +60,53 @@ export default function BlogDetails() {
   if (!article) return <p>No article found for slug: {slug}</p>;
 
   return (
-    <div className="p-6">
+    <div className="max-w-5xl mx-auto px-4 py-6">
       <button
         onClick={() => router.push("/blog")}
-        className="flex mb-4 items-center gap-1 cursor-pointer text-sm font-medium text-gray-700 hover:text-blue-600"
+        className="mb-6 inline-flex cursor-pointer items-center gap-2 text-sm font-medium text-gray-600 hover:text-indigo-600 transition"
       >
         <ArrowLeft size={18} />
-        <span>Back</span>
+        Back
       </button>
-      <Image
-        className="w-full max-h-[520px] object-cover object-top mb-4 rounded"
-        width={320}
-        height={520}
-        loading="lazy"
-        unoptimized
-        src={`${process.env.NEXT_PUBLIC_ANALYTICS_ID}${article?.cover?.url}` || ""}
-        alt={article?.cover?.alternativeText}
-      />
-      <h1 className="text-2xl text-black-700 mb-2">
-        <strong> {article.title}</strong>
-      </h1>
-      <p className="text-black-700">
-        <strong>Description:</strong> {article.description}
-      </p>
-      <p className="text-black-700">
-        <strong>Author:</strong> {article.author.name} ({article.author.email})
-      </p>
-      <p className="text-black-700">
-        <strong>Category:</strong> {article.category.name}
-      </p>
+
+      <div className="mb-8 overflow-hidden rounded-xl">
+        <Image
+          className="w-full max-h-[520px] object-cover"
+          width={1200}
+          height={520}
+          loading="lazy"
+          unoptimized
+          src={`${process.env.NEXT_PUBLIC_ANALYTICS_ID}${article?.cover?.url}`}
+          alt={article?.cover?.alternativeText || article?.title}
+        />
+      </div>
+
+      <article className="space-y-6">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight">
+          {article.title}
+        </h1>
+
+        <div className="flex flex-wrap gap-4 text-sm text-gray-500">
+          <span>
+            <strong className="text-gray-700">Author:</strong>{" "}
+            {article.author.name}
+          </span>
+          <span>
+            <strong className="text-gray-700">Email:</strong>{" "}
+            {article.author.email}
+          </span>
+          <span className="inline-flex flex-wrap items-center rounded-full bg-indigo-50 px-3 py-1 -mt-1 text-indigo-600 font-medium">
+            {article.category.name}
+          </span>
+        </div>
+
+        <hr className="border-gray-200" />
+
+        <p className="text-base leading-relaxed text-gray-700">
+          {article.description}
+        </p>
+      </article>
     </div>
+
   );
 }
