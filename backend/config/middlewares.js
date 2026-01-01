@@ -10,23 +10,25 @@
 //   'strapi::favicon',
 //   'strapi::public',
 // ];
+
 export default [
   'strapi::errors',
-  'strapi::security',
+
   {
     name: 'strapi::cors',
     config: {
       enabled: true,
       origin: [
         'http://localhost:3000',
-        'http://localhost:3001',
-        // 'https://your-frontend-domain.onrender.com',
+        'https://localhost:3000',
       ],
-      headers: '*',
+      headers: ['Content-Type', 'Authorization'],
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
       credentials: true,
     },
   },
+
+  'strapi::security',
   'strapi::poweredBy',
   'strapi::logger',
   'strapi::query',
