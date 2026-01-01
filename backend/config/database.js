@@ -114,56 +114,18 @@
 //   };
 // };
 
-
-const path = require("path");
-
-module.exports = ({ env }) => {
-  const client = env("DATABASE_CLIENT", "postgres");
-  const databaseUrl = env("DATABASE_URL");
-
-  return {
+export default ({ env }) => ({
+  connection: {
+    client: 'postgres',
     connection: {
-      client,
-
-      connection:
-        client === "postgres"
-          ? databaseUrl
-            ? {
-                // ✅ Production / Render / Neon / Supabase
-                connectionString: databaseUrl,
-                ssl: { rejectUnauthorized: false },
-              }
-            : {
-                // ✅ Local Postgres
-                host: env("DATABASE_HOST", "localhost"),
-                port: env.int("DATABASE_PORT", 5432),
-                database: env("DATABASE_NAME", "strapi"),
-                user: env("DATABASE_USERNAME", "postgres"),
-                password: env("DATABASE_PASSWORD", "postgres"),
-                ssl: false,
-              }
-          : client === "mysql"
-          ? {
-              host: env("DATABASE_HOST", "localhost"),
-              port: env.int("DATABASE_PORT", 3306),
-              database: env("DATABASE_NAME", "strapi"),
-              user: env("DATABASE_USERNAME", "strapi"),
-              password: env("DATABASE_PASSWORD", "strapi"),
-              ssl: env.bool("DATABASE_SSL", false),
-            }
-          : {
-              // SQLite
-              filename: path.join(
-                __dirname,
-                "..",
-                env("DATABASE_FILENAME", ".tmp/data.db")
-              ),
-            },
-
-      pool: {
-        min: env.int("DATABASE_POOL_MIN", 2),
-        max: env.int("DATABASE_POOL_MAX", 10),
+      host: env('DATABASE_HOST'),
+      port: env.int('DATABASE_PORT', 5432),
+      database: env('DATABASE_NAME'),
+      user: env('DATABASE_USERNAME'),
+      password: env('DATABASE_PASSWORD'),
+      ssl: {
+        rejectUnauthorized: false,
       },
     },
-  };
-};
+  },
+});
