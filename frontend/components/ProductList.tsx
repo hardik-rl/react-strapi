@@ -26,6 +26,7 @@ const DELETE_PRODUCT = gql`
 `;
 
 interface Product {
+    documentId: string;
     name: string;
     price: number;
     description: Array<{ children: Array<{ text: string }> }>;
