@@ -44,8 +44,8 @@ const Page = () => {
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
-              { title: "Products", value: "50+" },
-              { title: "Blogs", value: "100+" },
+              { title: "Products", value: "10+" },
+              { title: "Blogs", value: "10+" },
               { title: "CMS Driven", value: "100%" },
             ].map((item, i) => (
               <div
