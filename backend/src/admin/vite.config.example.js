@@ -16,9 +16,10 @@ const { mergeConfig } = require("vite");
 module.exports = (config) => {
   return mergeConfig(config, {
     server: {
-      allowedHosts: [
-        "react-strapi-ztyl.onrender.com",
-      ],
+      allowedHosts: 'all',
+      // allowedHosts: [
+      //   "react-strapi-1.onrender.com",
+      // ],
     },
     resolve: {
       alias: {
