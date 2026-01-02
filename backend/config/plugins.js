@@ -1,13 +1,26 @@
 // module.exports = () => ({});
 
-export default {
-  graphql: {
-    enabled: true,
+// export default {
+//   graphql: {
+//     enabled: true,
+//     config: {
+//       defaultLimit: 10,
+//       apolloServer: {
+//         introspection: true,
+//       },
+//     },
+//   },
+// };
+
+module.exports = ({ env }) => ({
+  upload: {
     config: {
-      defaultLimit: 10,
-      apolloServer: {
-        introspection: true,
+      provider: 'cloudinary',
+      providerOptions: {
+        cloud_name: env('CLOUDINARY_NAME'),
+        api_key: env('CLOUDINARY_KEY'),
+        api_secret: env('CLOUDINARY_SECRET'),
       },
     },
   },
-};
+});
