@@ -58,7 +58,7 @@ const AddUpdateProduct = ({ form, setForm, modalOpen, setModalOpen, prodEdit, se
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setForm((prev: any) => ({ ...prev, [name]: value }));
+    setForm((prev: typeof form) => ({ ...prev, [name]: value }));
     setError(name as keyof typeof errors, { message: "" });
   };
 
