@@ -76,7 +76,7 @@ export default function BlogDetails() {
           height={520}
           loading="lazy"
           unoptimized
-          src={`${process.env.NEXT_PUBLIC_API_URL}${article?.cover?.url}`}
+          src={`${article?.cover?.url}`}
           alt={article?.cover?.alternativeText || article?.title}
         />
       </div>
