@@ -18,7 +18,7 @@ export default function Header() {
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
           <Link href="/" className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
-            MyBrand
+            StrapiApp
           </Link>
 
           {/* Desktop Menu */}

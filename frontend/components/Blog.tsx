@@ -1,8 +1,9 @@
 "use client";
+import Image from "next/image";
 import SpinLoader from "@/shared/utils/SpinLoader";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client/react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, User, User2 } from "lucide-react";
 
 const GET_ARTICLES = gql`
   query {
@@ -10,6 +11,13 @@ const GET_ARTICLES = gql`
       title
       slug
       description
+       author {
+        name
+        email
+        avatar {
+          url 
+}
+      }   
     }
 }`;
 
@@ -66,6 +74,11 @@ export default function BlogList() {
               <p className="text-sm text-gray-600 leading-relaxed line-clamp-3 mb-4">
                 {item.description}
               </p>
+
+              <div className="flex mt-2 mb-4 items-center gap-2">
+                <Image src={item.author.avatar?.url} alt={item.author.name} width={26} height={26} className="rounded-full" />
+                <strong className="text-sm">{item.author.name}</strong>
+              </div>
 
               <span className="mt-auto inline-flex items-center text-sm font-medium text-indigo-600 group-hover:underline">
                 Read more

@@ -40,7 +40,7 @@ const Page = () => {
       </section>
 
       {/* STATS */}
-      <section className="-mt-16 relative z-10">
+      {/* <section className="-mt-16 relative z-10">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
@@ -60,7 +60,7 @@ const Page = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* FEATURES */}
       <section className="py-24">
