@@ -91,37 +91,38 @@ const ProductList = () => {
     return (
         <>
             <AddUpdateProduct modalOpen={modalOpen} setModalOpen={setModalOpen} form={form} setForm={setForm} prodEdit={prodEdit} setProdEdit={setProdEdit} />
-            <table className="table-auto w-full">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {paginatedProducts?.map((item: Product, index: number) => (
-                        <tr key={index}>
-                            <td>{item.name}</td>
-                            <td className='w-1/2'>{item.description[0]?.children[0]?.text}</td>
-                            <td>{item.price}</td>
-                            <td>
-                                <div className='flex items-center gap-3'>
-                                    <button onClick={() => handleUpdate(item)}>
-                                        <Pencil className="cursor-pointer text-blue-700" size={18} />
-                                    </button>
-                                    <button onClick={() => handleRemoveSingleUser(item?.documentId!)}>
-                                        <Trash className="cursor-pointer text-red-500" size={18} />
-                                    </button>
-                                </div>
-                            </td>
+            <div className="overflow-x-auto">
+                <table className="table-auto w-full overflow-auto">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Action</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
-
-            <div className="flex items-center gap-3 my-8">
+                    </thead>
+                    <tbody>
+                        {paginatedProducts?.map((item: Product, index: number) => (
+                            <tr key={index}>
+                                <td>{item.name}</td>
+                                <td className='w-1/2'>{item.description[0]?.children[0]?.text}</td>
+                                <td>{item.price}</td>
+                                <td>
+                                    <div className='flex items-center gap-3'>
+                                        <button onClick={() => handleUpdate(item)}>
+                                            <Pencil className="cursor-pointer text-blue-700" size={18} />
+                                        </button>
+                                        <button onClick={() => handleRemoveSingleUser(item?.documentId!)}>
+                                            <Trash className="cursor-pointer text-red-500" size={18} />
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+            <div className="flex items-center gap-3 my-8 pb-4">
                 <button
                     className="px-3 py-1 bg-gray-300 rounded disabled:opacity-50 cursor-pointer flex items-center gap-1"
                     disabled={page <= 1}

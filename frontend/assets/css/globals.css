@@ -32,6 +32,12 @@ td, th {
   border: 1px solid #474545;
 }
 
+@media (max-width: 767px) {
+  td, th {
+    white-space: nowrap;
+  }
+}
+
 .loading-wrapper {
   display: flex;
   justify-content: center;
