@@ -84,66 +84,73 @@ const ProductList = () => {
         return <p>Error: {error.message}</p>;
     }
 
-    if (!data?.products?.length) {
-        return <p>No products found.</p>;
-    }
+    // if (!data?.products?.length) {
+    //     return <p>No products found.</p>;
+    // }
 
     return (
         <>
             <AddUpdateProduct modalOpen={modalOpen} setModalOpen={setModalOpen} form={form} setForm={setForm} prodEdit={prodEdit} setProdEdit={setProdEdit} />
-            <div className="overflow-x-auto">
-                <table className="table-auto w-full overflow-auto">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {paginatedProducts?.map((item: Product, index: number) => (
-                            <tr key={index}>
-                                <td>{item.name}</td>
-                                <td className='w-1/2'>{item.description[0]?.children[0]?.text}</td>
-                                <td>{item.price}</td>
-                                <td>
-                                    <div className='flex items-center gap-3'>
-                                        <button onClick={() => handleUpdate(item)}>
-                                            <Pencil className="cursor-pointer text-blue-700" size={18} />
-                                        </button>
-                                        <button onClick={() => handleRemoveSingleUser(item?.documentId!)}>
-                                            <Trash className="cursor-pointer text-red-500" size={18} />
-                                        </button>
-                                    </div>
-                                </td>
+
+            <div className='overflow-auto'>
+                {data && data.products && data.products.length > 0 ? (
+                    <table className="table-auto w-full ">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                                <th>Action</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {paginatedProducts?.map((item: Product, index: number) => (
+                                <tr key={index}>
+                                    <td>{item.name}</td>
+                                    <td className='w-1/2'>{item.description[0]?.children[0]?.text}</td>
+                                    <td>{item.price}</td>
+                                    <td>
+                                        <div className='flex items-center gap-3'>
+                                            <button onClick={() => handleUpdate(item)}>
+                                                <Pencil className="cursor-pointer text-blue-700" size={18} />
+                                            </button>
+                                            <button onClick={() => handleRemoveSingleUser(item?.documentId!)}>
+                                                <Trash className="cursor-pointer text-red-500" size={18} />
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                ) : (
+                    <p className='mx-3'>No products found.</p>
+                )}
             </div>
-            <div className="flex items-center gap-3 my-8 pb-4">
-                <button
-                    className="px-3 py-1 bg-gray-300 rounded disabled:opacity-50 cursor-pointer flex items-center gap-1"
-                    disabled={page <= 1}
-                    onClick={() => setPage(page - 1)}
-                >
-                    <ArrowLeft />
-                </button>
+            {data && data?.products.length > 0 && (
+                <div className="flex items-center gap-3 my-8 pb-4">
+                    <button
+                        className="px-3 py-1 bg-gray-300 rounded disabled:opacity-50 cursor-pointer flex items-center gap-1"
+                        disabled={page <= 1}
+                        onClick={() => setPage(page - 1)}
+                    >
+                        <ArrowLeft />
+                    </button>
 
-                <span>
-                    Page {page} of {totalPages}
-                </span>
+                    <span>
+                        Page {page} of {totalPages}
+                    </span>
 
-                <button
-                    className="px-3 py-1 bg-gray-300 rounded disabled:opacity-50 cursor-pointer flex items-center gap-1"
-                    disabled={page >= totalPages}
-                    onClick={() => setPage(page + 1)}
-                >
-                    <ArrowRight />
-                </button>
-            </div>
+                    <button
+                        className="px-3 py-1 bg-gray-300 rounded disabled:opacity-50 cursor-pointer flex items-center gap-1"
+                        disabled={page >= totalPages}
+                        onClick={() => setPage(page + 1)}
+                    >
+                        <ArrowRight />
+                    </button>
+                </div>)}
         </>
+
     )
 }
 
